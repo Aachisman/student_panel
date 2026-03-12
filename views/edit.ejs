@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Edit Student</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 min-h-screen flex items-center justify-center">
+
+<div class="bg-white shadow-xl p-8 rounded-xl w-96">
+
+<h2 class="text-2xl font-bold mb-6">Edit Student</h2>
+
+<input id="name" value="<%= student.name %>" class="border p-2 w-full mb-3">
+<input id="email" value="<%= student.email %>" class="border p-2 w-full mb-3">
+<input id="phone" value="<%= student.phone %>" class="border p-2 w-full mb-3">
+<input id="course" value="<%= student.course %>" class="border p-2 w-full mb-6">
+<input id="gender" value="<%= student.gender %>" class="border p-2 w-full mb-6">
+<input id="age" value="<%= student.age %>" class="border p-2 w-full mb-6">
+
+
+<button onclick="updateStudent('<%= student._id %>')"
+class="bg-indigo-600 text-white w-full p-2 rounded">
+Update Student
+</button>
+
+</div>
+
+
+<script>
+
+async function updateStudent(id){
+
+const student = {
+name: document.getElementById("name").value,
+email: document.getElementById("email").value,
+phone: document.getElementById("phone").value,
+course: document.getElementById("course").value,
+gender: document.getElementById("gender").value,
+age: document.getElementById("age").value
+}
+
+await fetch(`/update/${id}`,{
+method:"PUT",
+headers:{
+"Content-Type":"application/json"
+},
+body: JSON.stringify(student)
+})
+
+window.location.href="/students"
+
+}
+
+</script>
+
+</body>
+</html>

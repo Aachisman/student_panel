@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Students</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 min-h-screen">
+
+<header class="bg-white shadow p-4 flex justify-between">
+<h1 class="text-xl font-bold">Students</h1>
+<a href="dashboard">Dashboard</a>
+</header>
+
+<div class="max-w-6xl mx-auto mt-10">
+
+<!-- Add Student -->
+
+<form action="/students" method="POST"
+class="bg-white shadow rounded-xl p-6 mb-8 grid grid-cols-4 gap-4">
+
+<input name="name" placeholder="Name" class="border p-2 rounded">
+<input name="email" placeholder="Email" class="border p-2 rounded">
+<input name="phone" placeholder="Phone" class="border p-2 rounded">
+<input name="course" placeholder="Course" class="border p-2 rounded">
+<input name="gender" placeholder="Gender" class="border p-2 rounded">
+<input name="age" placeholder="Age" class="border p-2 rounded">
+
+
+<button class="col-span-4 bg-indigo-600 text-white p-2 rounded">
+Add Student
+</button>
+
+</form>
+
+
+<!-- Student Table -->
+
+<div class="bg-white shadow rounded-xl p-6">
+
+<table class="w-full text-left">
+
+<thead class="border-b">
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Email</th>
+<th>Phone</th>
+<th>Course</th>
+<th>Gender</th>
+<th>Age</th>
+</tr>
+</thead>
+
+<tbody>
+
+<% students.forEach(student => { %>
+
+<tr class="border-b">
+
+<td><%= student._id %></td>
+<td><%= student.name %></td>
+<td><%= student.email %></td>
+<td><%= student.phone %></td>
+<td><%= student.course %></td>
+<td><%= student.gender %></td>
+<td><%= student.age %></td>
+
+<td class="space-x-2">
+
+<a href="/edit/<%= student._id %>"
+class="bg-yellow-400 px-3 py-1 rounded">
+Edit
+</a>
+
+<button onclick="deleteStudent('<%= student._id %>')"
+class="bg-red-500 text-white px-3 py-1 rounded">
+Delete
+</button>
+
+</td>
+
+</tr>
+
+<% }) %>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+<script>
+
+async function deleteStudent(id){
+
+if(!confirm("Delete this student?")) return
+
+await fetch(`/delete/${id}`,{
+method:"DELETE"
+})
+
+location.reload()
+
+}
+
+</script>
+
+</body>
+</html>
