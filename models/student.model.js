@@ -1,10 +1,13 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/studentDB').then(() => {
-    console.log('Connected to MongoDB');
-}).catch((err) => {
-    console.error('Error connecting to MongoDB', err);
+mongoose.connect("mongodb+srv://admin:mxMBRuna8egofOJI@cluster0.mwfhawk.mongodb.net/studentDB?retryWrites=true&w=majority")
+.then(() => {
+  console.log("MongoDB connected");
+})
+.catch((error) => {
+  console.log("MongoDB connection error:", error);
 });
+
 
 
 const studentSchema = new mongoose.Schema({
